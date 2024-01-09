@@ -6,8 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -21,12 +23,16 @@ public class BudgetFX extends Application{
 	private double needs;
 	private double savings;
 	
+	DropShadow shadow = new DropShadow();
+	
 	public static void main(String[] args) {
 		launch();
 	}
 	
 	@Override
 	public void start(Stage mainStage) throws Exception {
+		
+		//welcome screen
 		Pane p1 = new Pane();
 		Scene t = new Scene(p1,500,400);
 		
@@ -64,6 +70,20 @@ public class BudgetFX extends Application{
 				t.setRoot(income(t));
 			}
 		});
+		
+		nxtBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(shadow);
+	          }
+	        });
+
+	    nxtBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(null);
+	          }
+	        });
 
 		p1.getChildren().addAll(welcomeTxt,adviceTxt,openImg,nxtBtn);
 		
