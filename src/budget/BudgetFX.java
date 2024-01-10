@@ -41,8 +41,7 @@ public class BudgetFX extends Application{
 	
 	@Override
 	public void start(Stage mainStage) throws Exception {
-		
-		//welcome screen
+		//Setting the scene
 		Pane p1 = new Pane();
 		Scene t = new Scene(p1,500,400);
 		t.setRoot(openScreen(t));
@@ -66,6 +65,7 @@ public class BudgetFX extends Application{
 		adviceTxt.setX(135);
 		adviceTxt.setY(130);
 		
+		//Image of Mr.Krabs
 		ImageView openImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYrKd0OAa5EUAaO_szXyjoq-p2_YpwOa4GFg&usqp=CAU");
 		openImg.setX(95);
 		openImg.setY(150);
@@ -184,7 +184,6 @@ public class BudgetFX extends Application{
 			  t.getWindow().setHeight(400);
 			}
 		});
-	    
 	    resetBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
 	          @Override
 	          public void handle(MouseEvent e) {
@@ -204,9 +203,93 @@ public class BudgetFX extends Application{
 	}
 	
 	public Pane needs(Scene t) {
+		t.getWindow().setHeight(350);
+		
+		//title
+		Label needsTitle = new Label("Needs(50%)");
+		needsTitle.setFont(openFont);
+		needsTitle.setTranslateX(110);
+		
+		//Food
+		Label foodLbl = new Label("Food:");
+		foodLbl.setFont(openFont);
+	    foodLbl.setTranslateX(2);
+	    foodLbl.setTranslateY(33);
+		
+		Label moneyLbl = new Label("$");
+		moneyLbl.setFont(openFont);
+		moneyLbl.setTranslateX(50);
+		moneyLbl.setTranslateY(33);
+		
+		TextField foodTxtF = new TextField();
+		foodTxtF.setTranslateX(65);
+		foodTxtF.setTranslateY(36);
+		
+		//Housing
+		Label housingLbl = new Label("Housing:");
+		housingLbl.setFont(openFont);
+		housingLbl.setTranslateX(2);
+		housingLbl.setTranslateY(66);
+		
+		Label moneyLbl2 = new Label("$");
+		moneyLbl2.setFont(openFont);
+		moneyLbl2.setTranslateX(82);
+		moneyLbl2.setTranslateY(66);
+		
+		TextField housingTxtF = new TextField();
+		housingTxtF.setTranslateX(97);
+		housingTxtF.setTranslateY(69);
+
+		//Transportation
+		Label tranLbl = new Label("Transportation:");
+		tranLbl.setFont(openFont);
+		tranLbl.setTranslateX(2);
+		tranLbl.setTranslateY(99);
+		
+		Label moneyLbl3 = new Label("$");
+		moneyLbl3.setFont(openFont);
+		moneyLbl3.setTranslateX(142);
+		moneyLbl3.setTranslateY(99);
+		
+		TextField tranTxtF = new TextField();
+		tranTxtF.setTranslateX(157);
+		tranTxtF.setTranslateY(102);
+		
+		//Insurance
+		Label insLbl = new Label("Insurance:");
+		insLbl.setFont(openFont);
+		insLbl.setTranslateX(2);
+		insLbl.setTranslateY(132);
+		
+		Label moneyLbl4 = new Label("$");
+		moneyLbl4.setFont(openFont);
+		moneyLbl4.setTranslateX(100);
+		moneyLbl4.setTranslateY(132);
+		
+		TextField insTxtF = new TextField();
+		insTxtF.setTranslateX(115);
+		insTxtF.setTranslateY(135);
+		
+		//Basic utilities
+		Label utiLbl = new Label("Basic utilities:");
+		utiLbl.setFont(openFont);
+		utiLbl.setTranslateX(2);
+		utiLbl.setTranslateY(165);
+		
+		Label moneyLbl5 = new Label("$");
+		moneyLbl5.setFont(openFont);
+		moneyLbl5.setTranslateX(132);
+		moneyLbl5.setTranslateY(165);
+		
+		TextField utiTxtF = new TextField();
+		utiTxtF.setTranslateX(147);
+		utiTxtF.setTranslateY(168);
 		
 		Pane needsPane = new Pane();
+		needsPane.getChildren().addAll(needsTitle,foodLbl,moneyLbl,foodTxtF,housingLbl,moneyLbl2,housingTxtF,tranLbl,moneyLbl3,tranTxtF,insLbl,moneyLbl4,insTxtF,utiLbl,moneyLbl5,utiTxtF);
 		return needsPane;
+
+
 	}
 
 }
