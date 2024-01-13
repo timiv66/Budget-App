@@ -14,6 +14,8 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,9 +29,17 @@ import javafx.util.converter.IntegerStringConverter;
 public class BudgetFX extends Application{
 	
 	private double monthlyIncome;
-	private double wants;
-	private double needs;
-	private double savings;
+	private double needsTotal;
+	private double wantsTotal;
+	private double savingsTotal;
+	
+	//categories for needs section
+	private double foodAmt;
+	private double houseAmt;
+	private double tranAmt;
+	private double insureAmt;
+	private double utilAmt;
+	private double childAmt;
 	
 	DropShadow shadow = new DropShadow();
 	Font openFont = new Font("Impact",22);
@@ -158,6 +168,7 @@ public class BudgetFX extends Application{
 			  }
 			}
 		});
+		
 		nxtBtn2.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
 	          @Override
 	          public void handle(MouseEvent e) {
@@ -285,11 +296,108 @@ public class BudgetFX extends Application{
 		utiTxtF.setTranslateX(147);
 		utiTxtF.setTranslateY(168);
 		
+		//Child Care
+		Label childLbl = new Label("Child Care:");
+		childLbl.setFont(openFont);
+		childLbl.setTranslateX(2);
+		childLbl.setTranslateY(198);
+		
+		Label moneyLbl6 = new Label("$");
+		moneyLbl6.setFont(openFont);
+		moneyLbl6.setTranslateX(100);
+		moneyLbl6.setTranslateY(198);
+		
+		TextField childTxtF = new TextField();
+		childTxtF.setTranslateX(115);
+		childTxtF.setTranslateY(201);
+		
+		//error msg
+		Text errorMsg = new Text("Please enter valid numbers and leave nothing blank");
+		errorMsg.setFill(Color.RED);
+		errorMsg.setFont(txtFont);
+		errorMsg.setX(5);
+		errorMsg.setY(250);
+		errorMsg.setVisible(false);
+		
+		//next button
+		Button nxtBtn = new Button("Next");
+		nxtBtn.setTranslateX(300);
+		nxtBtn.setTranslateY(283);
+		
+		nxtBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(shadow);
+	          }
+	        });
+	    nxtBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(null);
+	          }
+	        });
+	    
+	   nxtBtn.setOnAction(new EventHandler <ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					//adding all txt field numbers 
+					foodAmt = Double.parseDouble(foodTxtF.getText());
+					houseAmt = Double.parseDouble(housingTxtF.getText());
+					tranAmt = Double.parseDouble(tranTxtF.getText());
+					insureAmt = Double.parseDouble(insTxtF.getText());
+					utilAmt = Double.parseDouble(utiTxtF.getText());
+					childAmt = Double.parseDouble(childTxtF.getText());
+					needsTotal=foodAmt+houseAmt+tranAmt+insureAmt+utilAmt+childAmt;
+					t.setRoot(wants(t));
+				}catch(NumberFormatException e) {
+					errorMsg.setVisible(true);
+				}
+			}
+		});
+	    
+		//reset button
+		Button resetBtn = new Button("Reset");
+		resetBtn.setTranslateX(3);
+		resetBtn.setTranslateY(283);
+		
+		resetBtn.setOnAction(new EventHandler <ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				foodTxtF.setText("");
+				housingTxtF.setText("");
+				tranTxtF.setText("");
+				insTxtF.setText("");
+				utiTxtF.setText("");
+				childTxtF.setText("");
+			}
+		});
+		
+		resetBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	           resetBtn.setEffect(shadow);
+	          }
+	        });
+	    resetBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            resetBtn.setEffect(null);
+	          }
+	        });
+		
 		Pane needsPane = new Pane();
-		needsPane.getChildren().addAll(needsTitle,foodLbl,moneyLbl,foodTxtF,housingLbl,moneyLbl2,housingTxtF,tranLbl,moneyLbl3,tranTxtF,insLbl,moneyLbl4,insTxtF,utiLbl,moneyLbl5,utiTxtF);
+		needsPane.getChildren().addAll(needsTitle,foodLbl,moneyLbl,foodTxtF,housingLbl,moneyLbl2,housingTxtF,
+				tranLbl,moneyLbl3,tranTxtF,insLbl,moneyLbl4,insTxtF,utiLbl,moneyLbl5,utiTxtF,childLbl,moneyLbl6,childTxtF,
+				errorMsg,nxtBtn,resetBtn);
 		return needsPane;
-
-
+	}
+	
+	public Pane wants(Scene t) {
+		
+		Pane wantsPane = new Pane();
+		
+		return wantsPane;
 	}
 
 }
