@@ -41,6 +41,15 @@ public class BudgetFX extends Application{
 	private double utilAmt;
 	private double childAmt;
 	
+	//categories for wants section
+	private double travelAmt;
+	private double eatoutAmt;
+	private double subAmt;
+	private double clothAmt;
+	private double hobAmt;
+	private double entAmt;
+	
+	
 	DropShadow shadow = new DropShadow();
 	Font openFont = new Font("Impact",22);
 	Font txtFont = new Font("Times New Roman",12);
@@ -85,7 +94,7 @@ public class BudgetFX extends Application{
 		nxtBtn1.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				t.setRoot(income(t));
+				t.setRoot(wants(t));
 			}
 		});
 		nxtBtn1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -215,8 +224,9 @@ public class BudgetFX extends Application{
 	
 	public Pane needs(Scene t) {
 		t.getWindow().setHeight(350);
+		t.getWindow().setWidth(360);
 		
-		//title
+		//needs title
 		Label needsTitle = new Label("Needs(50%)");
 		needsTitle.setFont(openFont);
 		needsTitle.setTranslateX(110);
@@ -394,9 +404,107 @@ public class BudgetFX extends Application{
 	}
 	
 	public Pane wants(Scene t) {
+		t.getWindow().setHeight(350);
+		t.getWindow().setWidth(360);
+		
+		//wants title
+		Label wantsTitle = new Label("Wants(30%)");
+		wantsTitle.setFont(openFont);
+		wantsTitle.setTranslateX(110);
+		
+		//travel
+		Label travelLbl = new Label("Travel:");
+		travelLbl.setFont(openFont);
+	    travelLbl.setTranslateX(2);
+	    travelLbl.setTranslateY(33);
+		
+		Label moneyLbl = new Label("$");
+		moneyLbl.setFont(openFont);
+		moneyLbl.setTranslateX(65);
+		moneyLbl.setTranslateY(33);
+		
+		TextField travelTxtF = new TextField();
+		travelTxtF.setTranslateX(80);
+		travelTxtF.setTranslateY(36);
+		
+		//Eating Out
+		Label eatoutLbl = new Label("Eating Out:");
+		eatoutLbl.setFont(openFont);
+		eatoutLbl.setTranslateX(2);
+		eatoutLbl.setTranslateY(66);
+		
+		Label moneyLbl2 = new Label("$");
+		moneyLbl2.setFont(openFont);
+		moneyLbl2.setTranslateX(98);
+		moneyLbl2.setTranslateY(66);
+		
+		TextField eatoutTxtF = new TextField();
+		eatoutTxtF.setTranslateX(113);
+		eatoutTxtF.setTranslateY(69);
+		
+		//Subscriptions
+		Label subLbl = new Label("Subscriptions:");
+		subLbl.setFont(openFont);
+		subLbl.setTranslateX(2);
+		subLbl.setTranslateY(99);
+		
+		Label moneyLbl3 = new Label("$");
+		moneyLbl3.setFont(openFont);
+		moneyLbl3.setTranslateX(135);
+		moneyLbl3.setTranslateY(99);
+		
+		TextField subTxtF = new TextField();
+		subTxtF.setTranslateX(150);
+		subTxtF.setTranslateY(102);
+		
+		//Clothing
+		Label clothLbl = new Label("Clothing:");
+		clothLbl.setFont(openFont);
+		clothLbl.setTranslateX(2);
+		clothLbl.setTranslateY(132);
+		
+		Label moneyLbl4 = new Label("$");
+		moneyLbl4.setFont(openFont);
+		moneyLbl4.setTranslateX(85);
+		moneyLbl4.setTranslateY(132);
+		
+		TextField clothTxtF = new TextField();
+		clothTxtF.setTranslateX(100);
+		clothTxtF.setTranslateY(135);
+		
+		//Hobbies
+		Label hobLbl = new Label("Hobbies:");
+		hobLbl.setFont(openFont);
+		hobLbl.setTranslateX(2);
+		hobLbl.setTranslateY(165);
+		
+		Label moneyLbl5 = new Label("$");
+		moneyLbl5.setFont(openFont);
+		moneyLbl5.setTranslateX(82);
+		moneyLbl5.setTranslateY(165);
+		
+		TextField hobTxtF = new TextField();
+		hobTxtF.setTranslateX(97);
+		hobTxtF.setTranslateY(168);
+		
+		//Entertainment
+		Label entLbl = new Label("Entertainment:");
+		entLbl.setFont(openFont);
+		entLbl.setTranslateX(2);
+		entLbl.setTranslateY(198);
+		
+		Label moneyLbl6 = new Label("$");
+		moneyLbl6.setFont(openFont);
+		moneyLbl6.setTranslateX(136);
+		moneyLbl6.setTranslateY(198);
+		
+		TextField entTxtF = new TextField();
+		entTxtF.setTranslateX(151);
+		entTxtF.setTranslateY(201);
 		
 		Pane wantsPane = new Pane();
-		
+		wantsPane.getChildren().addAll(wantsTitle,travelLbl,moneyLbl,travelTxtF,eatoutLbl,moneyLbl2,eatoutTxtF,subLbl,moneyLbl3,subTxtF,clothLbl,moneyLbl4,clothTxtF,
+				hobLbl,moneyLbl5,hobTxtF,entLbl,moneyLbl6,entTxtF);
 		return wantsPane;
 	}
 
