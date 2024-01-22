@@ -586,6 +586,7 @@ public class BudgetFX extends Application{
 	}
 	
 	public Pane savings(Scene t) {
+		Label savingsLbl = new Label();
 		
 		Pane savePane = new Pane();
 		return savePane;
