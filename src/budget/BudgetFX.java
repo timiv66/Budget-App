@@ -94,7 +94,7 @@ public class BudgetFX extends Application{
 		nxtBtn1.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				t.setRoot(wants(t));
+				t.setRoot(income(t));
 			}
 		});
 		nxtBtn1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -502,10 +502,93 @@ public class BudgetFX extends Application{
 		entTxtF.setTranslateX(151);
 		entTxtF.setTranslateY(201);
 		
+		//error msg
+		Text errorMsg = new Text("Please enter valid numbers and leave nothing blank");
+		errorMsg.setFill(Color.RED);
+		errorMsg.setFont(txtFont);
+		errorMsg.setX(5);
+		errorMsg.setY(250);
+		errorMsg.setVisible(false);
+		
+		//Next Button
+		Button nxtBtn = new Button("Next");
+		nxtBtn.setTranslateX(300);
+		nxtBtn.setTranslateY(283);
+		
+		nxtBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(shadow);
+	          }
+	        });
+	    nxtBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(null);
+	          }
+	        });
+	    
+	    nxtBtn.setOnAction(new EventHandler <ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					travelAmt = Double.parseDouble(travelTxtF.getText());
+				    eatoutAmt = Double.parseDouble(eatoutTxtF.getText());
+				    subAmt = Double.parseDouble(subTxtF.getText());
+					clothAmt = Double.parseDouble(clothTxtF.getText());
+					hobAmt = Double.parseDouble(hobTxtF.getText());
+					entAmt = Double.parseDouble(entTxtF.getText());
+					wantsTotal = travelAmt+eatoutAmt+subAmt+clothAmt+hobAmt+entAmt;
+					t.setRoot(savings(t));
+				}catch(NumberFormatException e) {
+					errorMsg.setVisible(true);
+				}
+			}
+	    	
+	    });
+	    
+	        //reset button
+	  		Button resetBtn = new Button("Reset");
+	  		resetBtn.setTranslateX(3);
+	  		resetBtn.setTranslateY(283);
+	  		
+	  		resetBtn.setOnAction(new EventHandler <ActionEvent>() {
+	  			@Override
+	  			public void handle(ActionEvent arg0) {
+	  				travelTxtF.setText("");
+	  				eatoutTxtF.setText("");
+	  				subTxtF.setText("");
+	  				clothTxtF.setText("");
+	  				hobTxtF.setText("");
+	  				entTxtF.setText("");
+	  			}
+	  		});
+	  		
+	  		resetBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	  	          @Override
+	  	          public void handle(MouseEvent e) {
+	  	           resetBtn.setEffect(shadow);
+	  	          }
+	  	        });
+	  	    resetBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	  	          @Override
+	  	          public void handle(MouseEvent e) {
+	  	            resetBtn.setEffect(null);
+	  	          }
+	  	        });
+	    
+	    
+		
 		Pane wantsPane = new Pane();
 		wantsPane.getChildren().addAll(wantsTitle,travelLbl,moneyLbl,travelTxtF,eatoutLbl,moneyLbl2,eatoutTxtF,subLbl,moneyLbl3,subTxtF,clothLbl,moneyLbl4,clothTxtF,
-				hobLbl,moneyLbl5,hobTxtF,entLbl,moneyLbl6,entTxtF);
+				hobLbl,moneyLbl5,hobTxtF,entLbl,moneyLbl6,entTxtF,errorMsg,nxtBtn);
 		return wantsPane;
+	}
+	
+	public Pane savings(Scene t) {
+		
+		Pane savePane = new Pane();
+		return savePane;
 	}
 
 }
