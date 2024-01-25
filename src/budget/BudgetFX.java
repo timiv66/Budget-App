@@ -32,6 +32,7 @@ public class BudgetFX extends Application{
 	private double needsTotal;
 	private double wantsTotal;
 	private double savingsTotal;
+	private double wholeTotal;
 	
 	//categories for needs section
 	private double foodAmt;
@@ -48,6 +49,11 @@ public class BudgetFX extends Application{
 	private double clothAmt;
 	private double hobAmt;
 	private double entAmt;
+	
+	//categories for savings section
+	private double emeFundAmt;
+	private double retireAmt;
+	private double debtAmt;
 	
 	
 	DropShadow shadow = new DropShadow();
@@ -581,14 +587,84 @@ public class BudgetFX extends Application{
 		
 		Pane wantsPane = new Pane();
 		wantsPane.getChildren().addAll(wantsTitle,travelLbl,moneyLbl,travelTxtF,eatoutLbl,moneyLbl2,eatoutTxtF,subLbl,moneyLbl3,subTxtF,clothLbl,moneyLbl4,clothTxtF,
-				hobLbl,moneyLbl5,hobTxtF,entLbl,moneyLbl6,entTxtF,errorMsg,nxtBtn);
+				hobLbl,moneyLbl5,hobTxtF,entLbl,moneyLbl6,entTxtF,errorMsg,nxtBtn,resetBtn);
 		return wantsPane;
 	}
 	
 	public Pane savings(Scene t) {
-		Label savingsLbl = new Label();
+		t.getWindow().setHeight(240);
+		t.getWindow().setWidth(360);
+		
+		//Savings Title
+		Label savingsLbl = new Label("Savings(20%)");
+		savingsLbl.setFont(openFont);
+		savingsLbl.setTranslateX(110);
+		
+		//Emergency Fund 
+		Label emeFundLbl = new Label("Emergency Fund:");
+		emeFundLbl.setFont(openFont);
+	    emeFundLbl.setTranslateX(2);
+	    emeFundLbl.setTranslateY(33);
+	    
+	    Label moneyLbl = new Label("$");
+		moneyLbl.setFont(openFont);
+		moneyLbl.setTranslateX(155);
+		moneyLbl.setTranslateY(33);
+		
+		TextField emeFundTxtF = new TextField();
+		emeFundTxtF.setTranslateX(170);
+		emeFundTxtF.setTranslateY(36);
+		
+		//Retirement 
+		Label retireLbl = new Label("Retirement:");
+		retireLbl.setFont(openFont);
+		retireLbl.setTranslateX(2);
+		retireLbl.setTranslateY(66);
+		
+		Label moneyLbl2 = new Label("$");
+		moneyLbl2.setFont(openFont);
+		moneyLbl2.setTranslateX(110);
+		moneyLbl2.setTranslateY(66);
+		
+		TextField retireTxtF = new TextField();
+		retireTxtF.setTranslateX(125);
+		retireTxtF.setTranslateY(69);
+		
+		//Debt Payments
+		Label debtLbl = new Label("Debt Payments:");
+		debtLbl.setFont(openFont);
+		debtLbl.setTranslateX(2);
+		debtLbl.setTranslateY(99);
+		
+		Label moneyLbl3 = new Label("$");
+		moneyLbl3.setFont(openFont);
+		moneyLbl3.setTranslateX(143);
+		moneyLbl3.setTranslateY(99);
+		
+		TextField debtTxtF = new TextField();
+		debtTxtF.setTranslateX(158);
+		debtTxtF.setTranslateY(102);
+		
+		//Error message
+		Text errorMsg = new Text("Please enter valid numbers and leave nothing blank");
+		errorMsg.setFill(Color.RED);
+		errorMsg.setFont(txtFont);
+		errorMsg.setX(5);
+		errorMsg.setY(145);
+		errorMsg.setVisible(false);
+		
+		//Next Button
+		Button nxtBtn = new Button("Next");
+		nxtBtn.setTranslateX(300);
+		nxtBtn.setTranslateY(163);
+		
+		//reset button
+  		Button resetBtn = new Button("Reset");
+  		resetBtn.setTranslateX(3);
+  		resetBtn.setTranslateY(163);
 		
 		Pane savePane = new Pane();
+		savePane.getChildren().addAll(savingsLbl,emeFundLbl,moneyLbl,emeFundTxtF,retireLbl,moneyLbl2,retireTxtF,debtLbl,moneyLbl3,debtTxtF,errorMsg,nxtBtn,resetBtn);
 		return savePane;
 	}
 
