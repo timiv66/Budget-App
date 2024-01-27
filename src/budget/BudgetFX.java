@@ -1,4 +1,5 @@
 package budget;
+import java.lang.Math;
 import java.util.function.UnaryOperator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -56,6 +57,7 @@ public class BudgetFX extends Application{
 	DropShadow shadow = new DropShadow();
 	Font openFont = new Font("Impact",22);
 	Font txtFont = new Font("Times New Roman",12);
+	Font resultFont = new Font("Verdana",16);
 	
 	public static void main(String[] args) {
 		launch();
@@ -675,7 +677,7 @@ public class BudgetFX extends Application{
 					debtAmt = Double.parseDouble(debtTxtF.getText());
 					savingsTotal = emeFundAmt+retireAmt+debtAmt;
 					wholeTotal = needsTotal+wantsTotal+savingsTotal;
-					t.setRoot(stats(t));
+					t.setRoot(results(t));
 				}catch(NumberFormatException e) {
 					errorMsg.setVisible(true);
 				}
@@ -715,11 +717,58 @@ public class BudgetFX extends Application{
 		return savePane;
 	}
 	
-	public Pane stats(Scene t) {
+	public Pane results(Scene t) {
+		t.getWindow().setHeight(240);
+		t.getWindow().setWidth(530);
 		
-		Pane statsPane = new Pane();
+		//Title
+		Label resultLbl = new Label("Results");
+		resultLbl.setFont(openFont);
+		resultLbl.setTranslateX(200);
 		
-		return statsPane;
+		//Total amount spent
+		Text totalAmtTxt = new Text("The total amount of money you used this month is $" + wholeTotal);
+		totalAmtTxt.setFont(resultFont);
+		totalAmtTxt.setY(50);
+		 
+		//Going over or under monthly income
+		Text overOrUnderTxt = new Text("");
+		overOrUnderTxt.setFont(resultFont);
+		overOrUnderTxt.setY(80);
+		
+		double overOrUnder = monthlyIncome-wholeTotal;
+		
+		if (monthlyIncome < wholeTotal ) {
+			overOrUnderTxt.setText("You have spent $" + Math.abs(overOrUnder) + " over your monthly income.");
+		}
+		else if (monthlyIncome > wholeTotal) {
+			overOrUnderTxt.setText("You have not spent $" + overOrUnder + " of your monthly income.");
+		}
+		
+		//Needs Percentage
+		double needsPercent = (needsTotal/wholeTotal) * 100.0;
+		
+		Text needPercText = new Text(String.format("%.2f", needsPercent) + "% of your monthly income was spent your needs");
+		needPercText.setFont(resultFont);
+		needPercText.setY(110);
+		
+		//Want Percentage
+		double wantsPercent = (wantsTotal/wholeTotal) * 100.0;
+		
+		Text wantsPercText = new Text(String.format("%.2f", wantsPercent) + "% of your monthly income was spent your wants");
+		wantsPercText.setFont(resultFont);
+		wantsPercText.setY(140);
+		
+		//Savings Percentage
+		double savingsPercent = (savingsTotal/wholeTotal) * 100.0;
+		
+		Text savingsPercText = new Text(String.format("%.2f", savingsPercent) + "% of your monthly income was spent your wants");
+		savingsPercText.setFont(resultFont);
+		savingsPercText.setY(170);
+		
+		Pane resultPane = new Pane();
+		resultPane.getChildren().addAll(resultLbl,totalAmtTxt,overOrUnderTxt,needPercText,wantsPercText,savingsPercText);
+		return resultPane;
 	}
 	
 	
