@@ -1,7 +1,5 @@
 package budget;
-
 import java.util.function.UnaryOperator;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +23,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-
 public class BudgetFX extends Application{
 	
 	private double monthlyIncome;
@@ -115,7 +112,7 @@ public class BudgetFX extends Application{
 	            nxtBtn1.setEffect(null);
 	          }
 	        });
-	    
+	   
 	    VBox vb1 = new VBox(20);
 	    vb1.setAlignment(Pos.CENTER);
 	    vb1.getChildren().addAll(welcomeTxt,adviceTxt,openImg,nxtBtn1);
@@ -165,10 +162,10 @@ public class BudgetFX extends Application{
 		errorMsg.setY(60);
 		errorMsg.setVisible(false);
 		
-        Button nxtBtn2 = new Button("Next");
-        nxtBtn2.setTranslateX(300);
-        nxtBtn2.setTranslateY(78);
-        
+       Button nxtBtn2 = new Button("Next");
+       nxtBtn2.setTranslateX(300);
+       nxtBtn2.setTranslateY(78);
+      
 		//Next button actions
 		nxtBtn2.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
@@ -196,11 +193,11 @@ public class BudgetFX extends Application{
 	            nxtBtn2.setEffect(null);
 	          }
 	        });
-	    
+	   
 	    Button resetBtn = new Button("Reset");
 	    resetBtn.setTranslateX(2);
 	    resetBtn.setTranslateY(78);
-	    
+	   
 	    resetBtn.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -222,7 +219,7 @@ public class BudgetFX extends Application{
 	            resetBtn.setEffect(null);
 	          }
 	        });
-	    
+	   
 		Pane incomePane = new Pane();
 		incomePane.getChildren().addAll(monthlyIncLbl,instructTxt,moneyLbl,incTxtF,errorMsg,nxtBtn2,resetBtn);
 		return incomePane;
@@ -266,7 +263,6 @@ public class BudgetFX extends Application{
 		TextField housingTxtF = new TextField();
 		housingTxtF.setTranslateX(97);
 		housingTxtF.setTranslateY(69);
-
 		//Transportation
 		Label tranLbl = new Label("Transportation:");
 		tranLbl.setFont(openFont);
@@ -352,12 +348,12 @@ public class BudgetFX extends Application{
 	            nxtBtn.setEffect(null);
 	          }
 	        });
-	    
+	   
 	   nxtBtn.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					//adding all txt field numbers 
+					//adding all txt field numbers
 					foodAmt = Double.parseDouble(foodTxtF.getText());
 					houseAmt = Double.parseDouble(housingTxtF.getText());
 					tranAmt = Double.parseDouble(tranTxtF.getText());
@@ -371,7 +367,7 @@ public class BudgetFX extends Application{
 				}
 			}
 		});
-	    
+	   
 		//reset button
 		Button resetBtn = new Button("Reset");
 		resetBtn.setTranslateX(3);
@@ -533,7 +529,7 @@ public class BudgetFX extends Application{
 	            nxtBtn.setEffect(null);
 	          }
 	        });
-	    
+	   
 	    nxtBtn.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -552,7 +548,7 @@ public class BudgetFX extends Application{
 			}
 	    	
 	    });
-	    
+	   
 	        //reset button
 	  		Button resetBtn = new Button("Reset");
 	  		resetBtn.setTranslateX(3);
@@ -582,8 +578,8 @@ public class BudgetFX extends Application{
 	  	            resetBtn.setEffect(null);
 	  	          }
 	  	        });
-	    
-	    
+	   
+	   
 		
 		Pane wantsPane = new Pane();
 		wantsPane.getChildren().addAll(wantsTitle,travelLbl,moneyLbl,travelTxtF,eatoutLbl,moneyLbl2,eatoutTxtF,subLbl,moneyLbl3,subTxtF,clothLbl,moneyLbl4,clothTxtF,
@@ -600,12 +596,12 @@ public class BudgetFX extends Application{
 		savingsLbl.setFont(openFont);
 		savingsLbl.setTranslateX(110);
 		
-		//Emergency Fund 
+		//Emergency Fund
 		Label emeFundLbl = new Label("Emergency Fund:");
 		emeFundLbl.setFont(openFont);
 	    emeFundLbl.setTranslateX(2);
 	    emeFundLbl.setTranslateY(33);
-	    
+	   
 	    Label moneyLbl = new Label("$");
 		moneyLbl.setFont(openFont);
 		moneyLbl.setTranslateX(155);
@@ -615,7 +611,7 @@ public class BudgetFX extends Application{
 		emeFundTxtF.setTranslateX(170);
 		emeFundTxtF.setTranslateY(36);
 		
-		//Retirement 
+		//Retirement
 		Label retireLbl = new Label("Retirement:");
 		retireLbl.setFont(openFont);
 		retireLbl.setTranslateX(2);
@@ -658,14 +654,73 @@ public class BudgetFX extends Application{
 		nxtBtn.setTranslateX(300);
 		nxtBtn.setTranslateY(163);
 		
-		//reset button
-  		Button resetBtn = new Button("Reset");
-  		resetBtn.setTranslateX(3);
-  		resetBtn.setTranslateY(163);
+		nxtBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(shadow);
+	          }
+	        });
+	    nxtBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            nxtBtn.setEffect(null);
+	          }
+	        });
+	    nxtBtn.setOnAction(new EventHandler <ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					emeFundAmt = Double.parseDouble(emeFundTxtF.getText());
+					retireAmt = Double.parseDouble(retireTxtF.getText());
+					debtAmt = Double.parseDouble(debtTxtF.getText());
+					savingsTotal = emeFundAmt+retireAmt+debtAmt;
+					wholeTotal = needsTotal+wantsTotal+savingsTotal;
+					t.setRoot(stats(t));
+				}catch(NumberFormatException e) {
+					errorMsg.setVisible(true);
+				}
+			}
+	    });
 		
+		//reset button
+ 		Button resetBtn = new Button("Reset");
+ 		resetBtn.setTranslateX(3);
+ 		resetBtn.setTranslateY(163);
+		
+ 		resetBtn.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	           resetBtn.setEffect(shadow);
+	          }
+	        });
+	    resetBtn.addEventHandler(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
+	          @Override
+	          public void handle(MouseEvent e) {
+	            resetBtn.setEffect(null);
+	          }
+	        });
+	    resetBtn.setOnAction(new EventHandler <ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				emeFundTxtF.setText("");
+				retireTxtF.setText("");
+				debtTxtF.setText("");
+				errorMsg.setVisible(false);
+			}
+	    });
+ 		
 		Pane savePane = new Pane();
-		savePane.getChildren().addAll(savingsLbl,emeFundLbl,moneyLbl,emeFundTxtF,retireLbl,moneyLbl2,retireTxtF,debtLbl,moneyLbl3,debtTxtF,errorMsg,nxtBtn,resetBtn);
+		savePane.getChildren().addAll(savingsLbl,emeFundLbl,moneyLbl,emeFundTxtF,retireLbl,moneyLbl2,
+				retireTxtF,debtLbl,moneyLbl3,debtTxtF,errorMsg,nxtBtn,resetBtn);
 		return savePane;
 	}
-
+	
+	public Pane stats(Scene t) {
+		
+		Pane statsPane = new Pane();
+		
+		return statsPane;
+	}
+	
+	
 }
