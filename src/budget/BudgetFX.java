@@ -726,23 +726,28 @@ public class BudgetFX extends Application{
 		resultLbl.setFont(openFont);
 		resultLbl.setTranslateX(200);
 		
-		//Total amount spent
-		Text totalAmtTxt = new Text("The total amount of money you used this month is $" + wholeTotal);
-		totalAmtTxt.setFont(resultFont);
-		totalAmtTxt.setY(50);
-		 
 		//Going over or under monthly income
-		Text overOrUnderTxt = new Text("");
-		overOrUnderTxt.setFont(resultFont);
-		overOrUnderTxt.setY(80);
+		Text overAmtTxt = new Text("");
+		overAmtTxt.setFont(resultFont);
+		overAmtTxt.setY(50);
+		overAmtTxt.setVisible(false);
+		 
+		Text underAmtTxt = new Text("");
+		underAmtTxt.setFont(resultFont);
+		underAmtTxt.setY(50);
+		underAmtTxt.setVisible(false);
 		
-		double overOrUnder = monthlyIncome-wholeTotal;
-		
-		if (monthlyIncome < wholeTotal ) {
-			overOrUnderTxt.setText("You have spent $" + Math.abs(overOrUnder) + " over your monthly income.");
+		if (monthlyIncome < wholeTotal) {
+			double amtOver;
+			amtOver = monthlyIncome - wholeTotal;
+			overAmtTxt.setText("You spent $" + String.format("%.2f", Math.abs(amtOver)) + " over your monthly income this month");
+			overAmtTxt.setVisible(true);
 		}
-		else if (monthlyIncome > wholeTotal) {
-			overOrUnderTxt.setText("You have not spent $" + overOrUnder + " of your monthly income.");
+		else if(monthlyIncome > wholeTotal) {
+			double amtUnder;
+			amtUnder = monthlyIncome - wholeTotal;
+			underAmtTxt.setText("You did not use $" + String.format("%.2f", amtUnder) + " of your monthly income this month");
+			underAmtTxt.setVisible(true);
 		}
 		
 		//Needs Percentage
@@ -750,24 +755,24 @@ public class BudgetFX extends Application{
 		
 		Text needPercText = new Text(String.format("%.2f", needsPercent) + "% of your monthly income was spent your needs");
 		needPercText.setFont(resultFont);
-		needPercText.setY(110);
+		needPercText.setY(80);
 		
 		//Want Percentage
 		double wantsPercent = (wantsTotal/wholeTotal) * 100.0;
 		
 		Text wantsPercText = new Text(String.format("%.2f", wantsPercent) + "% of your monthly income was spent your wants");
 		wantsPercText.setFont(resultFont);
-		wantsPercText.setY(140);
+		wantsPercText.setY(110);
 		
 		//Savings Percentage
 		double savingsPercent = (savingsTotal/wholeTotal) * 100.0;
 		
 		Text savingsPercText = new Text(String.format("%.2f", savingsPercent) + "% of your monthly income was spent your wants");
 		savingsPercText.setFont(resultFont);
-		savingsPercText.setY(170);
+		savingsPercText.setY(140);
 		
 		Pane resultPane = new Pane();
-		resultPane.getChildren().addAll(resultLbl,totalAmtTxt,overOrUnderTxt,needPercText,wantsPercText,savingsPercText);
+		resultPane.getChildren().addAll(resultLbl,overAmtTxt,underAmtTxt,needPercText,wantsPercText,savingsPercText);
 		return resultPane;
 	}
 	
