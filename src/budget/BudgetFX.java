@@ -26,33 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 public class BudgetFX extends Application{
 	
-	private double monthlyIncome;
-	private double needsTotal;
-	private double wantsTotal;
-	private double savingsTotal;
-	private double wholeTotal;
-	
-	//categories for needs section
-	private double foodAmt;
-	private double houseAmt;
-	private double tranAmt;
-	private double insureAmt;
-	private double utilAmt;
-	private double childAmt;
-	
-	//categories for wants section
-	private double travelAmt;
-	private double eatoutAmt;
-	private double subAmt;
-	private double clothAmt;
-	private double hobAmt;
-	private double entAmt;
-	
-	//categories for savings section
-	private double emeFundAmt;
-	private double retireAmt;
-	private double debtAmt;
-	
+	Saver newSaver = new Saver();
 	
 	DropShadow shadow = new DropShadow();
 	Font openFont = new Font("Impact",22);
@@ -177,7 +151,7 @@ public class BudgetFX extends Application{
 			  	errorMsg.setVisible(true);
 			  }
 			  else{
-				monthlyIncome = Double.parseDouble(incTxtF.getText());
+				newSaver.setMonthlyIncome(Double.parseDouble(incTxtF.getText())); 
 				t.setRoot(needs(t));
 			  }
 			}
@@ -203,7 +177,6 @@ public class BudgetFX extends Application{
 	    resetBtn.setOnAction(new EventHandler <ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-			  monthlyIncome = 0;
 			  t.setRoot(openScreen(t));
 			  t.getWindow().setWidth(500);
 			  t.getWindow().setHeight(400);
@@ -356,13 +329,13 @@ public class BudgetFX extends Application{
 			public void handle(ActionEvent arg0) {
 				try {
 					//adding all txt field numbers
-					foodAmt = Double.parseDouble(foodTxtF.getText());
-					houseAmt = Double.parseDouble(housingTxtF.getText());
-					tranAmt = Double.parseDouble(tranTxtF.getText());
-					insureAmt = Double.parseDouble(insTxtF.getText());
-					utilAmt = Double.parseDouble(utiTxtF.getText());
-					childAmt = Double.parseDouble(childTxtF.getText());
-					needsTotal=foodAmt+houseAmt+tranAmt+insureAmt+utilAmt+childAmt;
+					newSaver.setFoodAmt(Double.parseDouble(foodTxtF.getText()));  
+					newSaver.setHouseAmt(Double.parseDouble(housingTxtF.getText()));  
+					newSaver.setTranAmt(Double.parseDouble(tranTxtF.getText()));  
+					newSaver.setInsureAmt(Double.parseDouble(insTxtF.getText()));  
+					newSaver.setUtilAmt(Double.parseDouble(utiTxtF.getText())); 
+					newSaver.setChildAmt(Double.parseDouble(childTxtF.getText()));  
+					newSaver.calcNeeds();
 					t.setRoot(wants(t));
 				}catch(NumberFormatException e) {
 					errorMsg.setVisible(true);
@@ -536,13 +509,13 @@ public class BudgetFX extends Application{
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					travelAmt = Double.parseDouble(travelTxtF.getText());
-				    eatoutAmt = Double.parseDouble(eatoutTxtF.getText());
-				    subAmt = Double.parseDouble(subTxtF.getText());
-					clothAmt = Double.parseDouble(clothTxtF.getText());
-					hobAmt = Double.parseDouble(hobTxtF.getText());
-					entAmt = Double.parseDouble(entTxtF.getText());
-					wantsTotal = travelAmt+eatoutAmt+subAmt+clothAmt+hobAmt+entAmt;
+					newSaver.setTravelAmt(Double.parseDouble(travelTxtF.getText())); 
+				    newSaver.setEatoutAmt(Double.parseDouble(eatoutTxtF.getText()));   
+				    newSaver.setSubAmt(Double.parseDouble(subTxtF.getText()));  
+					newSaver.setClothAmt(Double.parseDouble(clothTxtF.getText())); 
+					newSaver.setHobAmt(Double.parseDouble(hobTxtF.getText())); 
+					newSaver.setEntAmt(Double.parseDouble(entTxtF.getText()));
+					newSaver.calcWants();
 					t.setRoot(savings(t));
 				}catch(NumberFormatException e) {
 					errorMsg.setVisible(true);
@@ -672,11 +645,11 @@ public class BudgetFX extends Application{
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					emeFundAmt = Double.parseDouble(emeFundTxtF.getText());
-					retireAmt = Double.parseDouble(retireTxtF.getText());
-					debtAmt = Double.parseDouble(debtTxtF.getText());
-					savingsTotal = emeFundAmt+retireAmt+debtAmt;
-					wholeTotal = needsTotal+wantsTotal+savingsTotal;
+					newSaver.setEmeFundAmt(Double.parseDouble(emeFundTxtF.getText()));	
+					newSaver.setRetireAmt(Double.parseDouble(retireTxtF.getText())); 
+					newSaver.setDebtAmt(Double.parseDouble(debtTxtF.getText())); 
+					newSaver.calcSavings();
+					newSaver.calcWholeTotal();
 					t.setRoot(results(t));
 				}catch(NumberFormatException e) {
 					errorMsg.setVisible(true);
@@ -737,35 +710,35 @@ public class BudgetFX extends Application{
 		underAmtTxt.setY(50);
 		underAmtTxt.setVisible(false);
 		
-		if (monthlyIncome < wholeTotal) {
+		if (newSaver.getMonthlyIncome() < newSaver.getWholeTotal()) {
 			double amtOver;
-			amtOver = monthlyIncome - wholeTotal;
+			amtOver = newSaver.getMonthlyIncome() - newSaver.getWholeTotal();
 			overAmtTxt.setText("You spent $" + String.format("%.2f", Math.abs(amtOver)) + " over your monthly income this month");
 			overAmtTxt.setVisible(true);
 		}
-		else if(monthlyIncome > wholeTotal) {
+		else if(newSaver.getMonthlyIncome() > newSaver.getWholeTotal()) {
 			double amtUnder;
-			amtUnder = monthlyIncome - wholeTotal;
+			amtUnder = newSaver.getMonthlyIncome() - newSaver.getWholeTotal();
 			underAmtTxt.setText("You did not use $" + String.format("%.2f", amtUnder) + " of your monthly income this month");
 			underAmtTxt.setVisible(true);
 		}
 		
 		//Needs Percentage
-		double needsPercent = (needsTotal/wholeTotal) * 100.0;
+		double needsPercent = (newSaver.getNeedsTotal()/newSaver.getWholeTotal()) * 100.0;
 		
 		Text needPercText = new Text(String.format("%.2f", needsPercent) + "% of your monthly income was spent your needs");
 		needPercText.setFont(resultFont);
 		needPercText.setY(80);
 		
 		//Want Percentage
-		double wantsPercent = (wantsTotal/wholeTotal) * 100.0;
+		double wantsPercent = (newSaver.getWantsTotal()/newSaver.getWholeTotal()) * 100.0;
 		
 		Text wantsPercText = new Text(String.format("%.2f", wantsPercent) + "% of your monthly income was spent your wants");
 		wantsPercText.setFont(resultFont);
 		wantsPercText.setY(110);
 		
 		//Savings Percentage
-		double savingsPercent = (savingsTotal/wholeTotal) * 100.0;
+		double savingsPercent = (newSaver.getSavingsTotal()/newSaver.getWholeTotal()) * 100.0;
 		
 		Text savingsPercText = new Text(String.format("%.2f", savingsPercent) + "% of your monthly income was spent your wants");
 		savingsPercText.setFont(resultFont);
