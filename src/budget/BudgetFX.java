@@ -724,23 +724,17 @@ public class BudgetFX extends Application{
 		}
 		
 		//Needs Percentage
-		double needsPercent = (newSaver.getNeedsTotal()/newSaver.getWholeTotal()) * 100.0;
-		
-		Text needPercText = new Text(String.format("%.2f", needsPercent) + "% of your monthly income was spent your needs");
+		Text needPercText = new Text(String.format("%.2f", newSaver.calcNeedPerc()) + "% of your monthly income was spent your needs");
 		needPercText.setFont(resultFont);
 		needPercText.setY(80);
 		
 		//Want Percentage
-		double wantsPercent = (newSaver.getWantsTotal()/newSaver.getWholeTotal()) * 100.0;
-		
-		Text wantsPercText = new Text(String.format("%.2f", wantsPercent) + "% of your monthly income was spent your wants");
+		Text wantsPercText = new Text(String.format("%.2f", newSaver.calcWantsPerc()) + "% of your monthly income was spent your wants");
 		wantsPercText.setFont(resultFont);
 		wantsPercText.setY(110);
 		
 		//Savings Percentage
-		double savingsPercent = (newSaver.getSavingsTotal()/newSaver.getWholeTotal()) * 100.0;
-		
-		Text savingsPercText = new Text(String.format("%.2f", savingsPercent) + "% of your monthly income was spent your wants");
+		Text savingsPercText = new Text(String.format("%.2f", newSaver.calcSavingsPerc()) + "% of your monthly income was spent your wants");
 		savingsPercText.setFont(resultFont);
 		savingsPercText.setY(140);
 		

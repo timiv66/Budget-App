@@ -166,6 +166,24 @@ public class Saver {
 		setWholeTotal(getNeedsTotal()+getWantsTotal()+getSavingsTotal());
 	}
 	
+	public double calcNeedPerc() {
+		double needsPercent;
+		needsPercent = (getNeedsTotal()/getWholeTotal()) * 100.0;
+		return needsPercent;
+	}
+	
+	public double calcWantsPerc() {
+		double wantsPercent;
+		wantsPercent = (getWantsTotal()/getWholeTotal()) * 100.0;
+		return wantsPercent;
+	}
+	
+	public double calcSavingsPerc() {
+		double savingsPercent;
+		savingsPercent = (getSavingsTotal()/getWholeTotal()) * 100.0;
+		return savingsPercent;
+	}
+	
 	Saver(){
 		
 	}
